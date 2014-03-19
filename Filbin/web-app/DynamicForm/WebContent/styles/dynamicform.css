@@ -1,0 +1,98 @@
+@CHARSET "ISO-8859-1";
+
+/*
+ * Right pane: Built form elements
+ */
+#content {
+	min-width: 768px;
+	display: inline-block;
+}
+.form-element {
+	margin: 25px;
+	padding: 10px;
+	position: relative;
+	border: 1px none;
+	border: 1px solid white;
+}
+.form-element:hover {
+	border: 1px dashed #90BEE4;
+}
+.form-element-controls {
+	position: absolute;
+	right: 0;
+	background-color: white;
+	display: none;
+}
+.hovered .form-element-controls {
+	display: block;
+}
+.form-element-controls > li {
+	display: inline-block;
+	padding: 2px;
+	cursor: pointer;
+}
+.form-element-controls .edit-control {
+	width: 24px;
+	height: 24px;
+	background-image: url('../images/edit_24.png');
+}
+.form-element-controls .delete-control {
+	width: 24px;
+	height: 24px;
+	background-image: url('../images/delete.png');
+}
+
+/*
+ * Left-pane: Form element selectors
+ */
+#selections {
+	float: left;
+	min-width: 256px;
+	border-right: 1px solid #E1E1E1;
+	padding-left: 40px;
+}
+.element-selector {
+	background-color: #428BCA;
+	color: white;
+	font-size: 16px;
+	width: 150px;
+	padding: 10px;
+	margin: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: -1px 3px 4px 0px rgba(96, 96, 96, 1);
+	-moz-box-shadow:    -1px 3px 4px 0px rgba(96, 96, 96, 1);
+	box-shadow:         -1px 3px 4px 0px rgba(96, 96, 96, 1);
+	cursor: pointer;
+}
+.element-selector.is-selected, .element-selector:hover {
+	background-color: #155183;
+}
+.element-selector.is-selected .add, .element-selector:hover .add {
+	background-image: url('../images/add_hover.png');
+}
+.add {
+	display: inline-block;
+	background-image: url('../images/add_white.png');
+	height: 24px;
+	width: 24px;
+	float: right;
+}
+
+ol, ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/*
+ * Custom CSS that overrides bootstrap
+ */
+.label {
+	color: black;
+}
+
+.template {
+	display: none;
+}
