@@ -2,6 +2,7 @@ package com.filbin
 
 
 import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
 import grails.transaction.Transactional
 
 /**
@@ -26,6 +27,10 @@ class ProposalController {
     def show(Proposal proposalInstance) {
         respond proposalInstance
     }
+	
+	def getJson(Proposal proposalInstance) {
+		render proposalInstance.jobTypes as JSON
+	}
 
     def create() {
         respond new Proposal(params)

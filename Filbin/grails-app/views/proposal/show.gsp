@@ -26,7 +26,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="proposal.dateCreated.label" default="Date Created" /></td>
 				
-				<td valign="top" class="value"><g:formatDate date="${proposalInstance?.dateCreated}" /></td>
+				<td valign="top" class="value"><g:formatDate date="${proposalInstance?.dateCreated}" format="MM/dd/yyyy" /></td>
 				
 			</tr>
 		
@@ -53,6 +53,12 @@
 		</tbody>
 	</table>
 </section>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#">Home</a></li>
+  <li><a href="#">Profile</a></li>
+  <li><a href="#">Messages</a></li>
+</ul>
 
 </body>
 

@@ -7,12 +7,12 @@
 		  </li>
 		  <li class="controller${params.controller == 'client' ? " active" : ""}">
 			<g:link controller="client" action="index">
-				<g:message code="CLient" default="View Clients"/>
+				<g:message code="CLient" default="View All Clients"/>
 			</g:link>
 		  </li>
 		<li class="controller${params.controller == 'proposal' ? " active" : ""}">
 		  	<g:link controller="Proposal" action="index">
-				<g:message code="Proposals" default="View Proposals"/>
+				<g:message code="Proposals" default="View All Proposals"/>
 			</g:link>
 		</li>
 	   </ul>
