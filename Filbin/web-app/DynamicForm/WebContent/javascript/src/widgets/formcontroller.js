@@ -89,7 +89,7 @@ kks.formController = (function() {
 	Loader.prototype = {
 		_load : function() {
 			this._controller.clear();
-			var json = kks.isProduction ? this._loadMethod() : window.testjson.copy(); //make a copy
+			var json = this._loadMethod();
 			for(var i = 0; i < json.length; i++) {
 				kks.pageController.addTemplate(json[i].type, json[i]);
 			}
@@ -157,10 +157,7 @@ kks.formController = (function() {
 	Saver.prototype = {
 		_save : function() {
 			var json = this._controller.toJson();
-			if(kks.isProduction) {
-				this._saveMethod(json);
-			}
-			//debugger;
+			this._saveMethod(json);
 		},
 		_connectHandlers : function() {
 			$('.js-save-form').on(
