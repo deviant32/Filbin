@@ -27,6 +27,7 @@ class Proposal {
     
 	static	constraints = {
 		name(blank:false)
+		client(blank:false)
     }
 	
 

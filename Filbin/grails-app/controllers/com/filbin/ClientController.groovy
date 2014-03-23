@@ -12,6 +12,7 @@ import grails.transaction.Transactional
 class ClientController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	String controllerName = "Client";
 
 	def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -26,7 +27,7 @@ class ClientController {
     def show(Client clientInstance) {
 		def criteria = Proposal.createCriteria() 
 		def proposalList = criteria.list(){
-			eq('id', clientInstance.id)
+			eq('client', clientInstance)
 		}
 		
         [clientInstance: clientInstance, proposalList : proposalList]
@@ -126,4 +127,5 @@ class ClientController {
             '*'{ render status: NOT_FOUND }
         }
     }
+	
 }

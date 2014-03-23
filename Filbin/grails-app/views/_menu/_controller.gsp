@@ -1,4 +1,4 @@
-<li class="dropdown">
+<%--<li class="dropdown">
 	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Browse <b class="caret"></b></a>
 	<ul class="dropdown-menu">
 		<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
@@ -19,3 +19,4 @@
 		</g:each>
 	</ul>
 </li>
+--%>

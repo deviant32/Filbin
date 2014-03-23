@@ -12,6 +12,7 @@ import grails.transaction.Transactional
 class ClientTypeController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	String controllerName = "Client Type";
 
 	def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -109,4 +110,5 @@ class ClientTypeController {
             '*'{ render status: NOT_FOUND }
         }
     }
+	
 }

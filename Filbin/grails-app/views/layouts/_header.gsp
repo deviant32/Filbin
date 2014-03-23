@@ -7,25 +7,12 @@
 		  </li>
 		  <li class="controller${params.controller == 'client' ? " active" : ""}">
 			<g:link controller="client" action="index">
-				<g:message code="CLient" default="Client"/>
+				<g:message code="CLient" default="View Clients"/>
 			</g:link>
 		  </li>
-		
-		  <li class="controller${params.controller == 'clientType' ? " active" : ""}">
-		  	<g:link controller="ClientType" action="index">
-				<g:message code="CLient Type" default="Client Type"/>
-			</g:link>
-		</li>
-		
-		<li class="controller${params.controller == 'jobType' ? " active" : ""}">
-		  	<g:link controller="JobType" action="index">
-				<g:message code="Job Type" default="Job Type"/>
-			</g:link>
-		</li>
-		
 		<li class="controller${params.controller == 'proposal' ? " active" : ""}">
 		  	<g:link controller="Proposal" action="index">
-				<g:message code="Proposals" default="Proposal"/>
+				<g:message code="Proposals" default="View Proposals"/>
 			</g:link>
 		</li>
 	   </ul>

@@ -12,6 +12,7 @@
 <body>
 
 <section id="show-client" class="first">
+	<h2>${fieldValue(bean: clientInstance, field: "name")}</h2>
 
 	<table class="table">
 		<tbody>
@@ -77,7 +78,8 @@
 	
 	
 	<div>
-    <h2>${fieldValue(bean: clientInstance, field: "name")}'s Proposals</h2>
+    <h2>Proposals</h2>
+    <a class="btn btn-primary" href="${createLink(controller:'proposal',action:'create',params:['client.id': clientInstance.id])}" role="button">Create Proposal</a>
     <table class="table table-bordered margin-top-medium">
       <thead>
         <tr>
