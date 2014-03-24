@@ -26,7 +26,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="proposal.dateCreated.label" default="Date Created" /></td>
 				
-				<td valign="top" class="value"><g:formatDate date="${proposalInstance?.dateCreated}" format="MM/dd/yyyy" /></td>
+				<td valign="top" class="value"><g:formatDate date="${proposalInstance?.dateCreated}" /></td>
 				
 			</tr>
 		

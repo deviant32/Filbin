@@ -15,6 +15,11 @@
 				<g:message code="Proposals" default="View All Proposals"/>
 			</g:link>
 		</li>
+		<li class="controller${params.controller == 'quote' ? " active" : ""}">
+		  	<g:link controller="quote" action="index">
+				<g:message code="Quotes" default="View All Quotes"/>
+			</g:link>
+		</li>
 	   </ul>
 	</div>
 	

@@ -1,40 +1,38 @@
 package com.filbin
 
 /**
- * Proposal
+ * Quote
  * A domain class describes the data object and it's mapping to the database
  */
-class Proposal {
+class Quote {
 
 	/* Default (injected) attributes of GORM */
 //	Long	id
 //	Long	version
 	
 	/* Automatic timestamping of GORM */
-	String name
 	Date	dateCreated
 	Date	lastUpdated
 	
-	static	belongsTo	= [client:Client]	// tells GORM to cascade commands: e.g., delete this object if the "parent" is deleted.
-	static hasMany = [jobTypes:JobType]
+	String name
 	
+	static belongsTo 	= [proposal:Proposal]
+	
+	LetterHead letterHead
+	Footer footer
+		
+//	static	belongsTo	= []	// tells GORM to cascade commands: e.g., delete this object if the "parent" is deleted.
 //	static	hasOne		= []	// tells GORM to associate another domain object as an owner in a 1-1 mapping
 //	static	hasMany		= []	// tells GORM to associate other domain objects for a 1-n or n-m mapping
 //	static	mappedBy	= []	// specifies which property should be used in a mapping 
 	
     static	mapping = {
+		name(nullable:false)
     }
     
 	static	constraints = {
-		name(blank:false)
-		client(blank:false)
     }
-
-	String toString(){
-		return name;
-	}
-
-		
+	
 	/*
 	 * Methods of the Domain Class
 	 */

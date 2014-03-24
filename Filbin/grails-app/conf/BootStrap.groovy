@@ -1,5 +1,8 @@
 import com.filbin.Client
 import com.filbin.ClientType
+import com.filbin.Footer
+import com.filbin.JobType
+import com.filbin.LetterHead
 
 class BootStrap {
 
@@ -30,6 +33,17 @@ class BootStrap {
 		 
 		 Client client7 = new Client(address: "1117 kenneth drive",emailAddress: "tpo1522@gmail.com",name: "Taytum Pot", notes: "Test notes....", phoneNumber: "6072422503", test: "test",  type: res);
 		 client7.save();
+		 
+		 LetterHead lh = new LetterHead(title:"Painting Letter Head", contents:"<h1>Filbin Painting</h1>");
+		 lh.save();
+		 
+		 Footer f = new Footer(title:"Standard Footer", contents:"<p>Copyright 2014</p>");
+		 f.save();
+		 
+		 JobType painting = new JobType(name:"Interior Residential Painting", jsonFormText:'{"0":[{"value":"","label":"Number of Rooms","name":"numrooms","type":"inputbox"},{"value":"","label":"Estimated Time","name":"Estimated_Time","type":"inputbox"},{"value":"","label":"Square Footage","name":"Square_Footage","type":"inputbox"},{"label":"Sheen","name":"","fieldOptions":[{"optionValue":"Satin","optionLabel":"Satin"},{"optionValue":"Semi Gloss","optionLabel":"Semi Gloss"},{"optionValue":"Gloss","optionLabel":"Gloss"}],"type":"dropdown"}]}');
+		 painting.save();
+		 
+		 
     }
     def destroy = {
     }
