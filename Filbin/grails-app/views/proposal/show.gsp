@@ -7,6 +7,25 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'proposal.label', default: 'Proposal')}" />
 	<title><g:message code="default.show.label" args="[entityName]" /></title>
+	<link rel="stylesheet" href="${resource(dir: 'DynamicForm/WebContent/styles', file: 'dynamicform.css')}" type="text/css">
+	<link rel="stylesheet" href="${resource(dir: 'DynamicForm/WebContent/styles', file: 'bootstrap.min.css')}" type="text/css">
+	
+	<script>
+		$(document).ready(function() {
+			kks.DynamicFormApp.initialize();
+			var url = '${createLink(controller : 'proposal', action:'getJson', params: [id:proposalInstance.id])}';
+			$.getJSON(url, function(data) {
+				var container = $('#jobTypes');
+				for(var j = 0; j < data.length; j++) {
+					var form = (JSON.parse(data[j].jsonFormText))['0'];
+					for(var i = 0; i < form.length; i++) {
+						var id = form[i].type;
+						kks.pageController.addTemplateToContainer(id, form[i], container);
+					}
+				}
+			});
+		});
+	</script>
 </head>
 
 <body>
@@ -54,11 +73,69 @@
 	</table>
 </section>
 
+<div class='templates'>
+	<div id='inputbox' class='template'>
+		<div class='form-group form-element'>
+			<label>
+				{{label}}
+				<input type='text' name={{name}} class='form-control'>
+			</label>
+		</div>
+	</div>
+	<div id='textarea' class='template'>
+		<div class='form-group form-element'>
+			<label>
+				{{label}}
+				<textarea class='form-control' name={{name}}></textarea>
+			</label>
+		</div>
+	</div>
+	<div id='radiogroup' class='template'>
+		<div class='form-group form-element'>
+			<span class='label'>{{label}}</span>
+			<div class='js-option-container'>
+			</div>
+		</div>
+	</div>
+	<div id='dropdown' class='template'>
+		<div class='form-group form-element'>
+			<span class='label'>{{label}}</span>
+			<select class='form-control js-option-container'></select>
+		</div>
+	</div>
+	<div id='selectlist' class='template'>
+		<div class='form-group form-element'>
+			<span class='label'>{{label}}</span>
+			<select multiple class='form-control js-option-container'></select>
+		</div>
+	</div>
+	<div id='checkbox' class='template'>
+		<div class='form-group form-element'>
+			<label>
+				<input type='checkbox' name={{name}} value={{value}} class='form-control'>{{label}}
+			</label>
+		</div>
+	</div>
+	
+	<div id='aradio' class='template'>
+		<div class='radio'>
+			<input type='radio' name={{optionName}} value={{optionValue}}>
+			<span class='label'>{{optionLabel}}</span>
+		</div>
+	</div>
+	
+	<div id='anoption' class='template'>
+		<option class='form-control' value={{optionValue}}>{{optionLabel}}</option>
+	</div>
+</div>
+
 <ul class="nav nav-tabs">
   <li class="active"><a href="#">Home</a></li>
   <li><a href="#">Profile</a></li>
   <li><a href="#">Messages</a></li>
 </ul>
+
+<div id='jobTypes'></div>
 
 </body>
 
