@@ -20,8 +20,9 @@
 	$(document).ready(function() {
 		kks.DynamicFormApp.initialize( {
 			'save' : function() {
+				console.log(arguments);
 				$("#jsonFormText").val((JSON.stringify(arguments)));
-				$("[name='jobTypeForm']").submit();		
+				//$("[name='jobTypeForm']").submit();		
 			},
 			'load' : function() {
 				console.log('load!', arguments);
@@ -102,35 +103,34 @@
   		</div>
   		<div id='radiogroup' class='template'>
   			<div class='form-group form-element'>
-  				<span class='label'>{{label}}</span>
+  				<label>{{label}}</label>
 	  			<div class='js-option-container'>
 	  			</div>
 	  		</div>
   		</div>
   		<div id='dropdown' class='template'>
   			<div class='form-group form-element'>
-  				<span class='label'>{{label}}</span>
+  				<label>{{label}}</label>
   				<select class='form-control js-option-container'></select>
   			</div>
   		</div>
   		<div id='selectlist' class='template'>
   			<div class='form-group form-element'>
-	  			<span class='label'>{{label}}</span>
+	  			<label>{{label}}</label>
   				<select multiple class='form-control js-option-container'></select>
 	  		</div>
   		</div>
   		<div id='checkbox' class='template'>
   			<div class='form-group form-element'>
-	  			<label>
-	  				<input type='checkbox' name={{name}} value={{value}} class='form-control'>{{label}}
-	  			</label>
+	  			<label>{{label}}</label>
+	  			<input type='checkbox' name={{name}} value={{value}} class='form-control'>
 	  		</div>
   		</div>
   		
   		<div id='aradio' class='template'>
   			<div class='radio'>
+  				<label>{{label}}</label>
   				<input type='radio' name={{optionName}} value={{optionValue}}>
-  				<span class='label'>{{optionLabel}}</span>
   			</div>
   		</div>
   		

@@ -43,6 +43,9 @@ class BootStrap {
 		 JobType painting = new JobType(name:"Interior Residential Painting", jsonFormText:'{"0":[{"value":"","label":"Number of Rooms","name":"numrooms","type":"inputbox"},{"value":"","label":"Estimated Time","name":"Estimated_Time","type":"inputbox"},{"value":"","label":"Square Footage","name":"Square_Footage","type":"inputbox"},{"label":"Sheen","name":"","fieldOptions":[{"optionValue":"Satin","optionLabel":"Satin"},{"optionValue":"Semi Gloss","optionLabel":"Semi Gloss"},{"optionValue":"Gloss","optionLabel":"Gloss"}],"type":"dropdown"}]}');
 		 painting.save();
 		 
+		 JobType powerWashing = new JobType(name:"Residential Power Washing", jsonFormText:'{"0":[{"value":"","label":"Square Footage","name":"squarefootage","type":"inputbox"},{"value":"","label":"Estimated Time","name":"time","type":"inputbox"},{"label":"Materials","name":"","fieldOptions":[{"optionValue":"Hose Extension","optionLabel":"Hose extension"},{"optionValue":"Chemicals","optionLabel":"Chemicals"},{"optionValue":"6 Foot Ladder","optionLabel":"6 Foot Ladder"},{"optionValue":"8 Foot Ladder","optionLabel":"8 Foot Ladder"},{"optionValue":"10 Foot Ladder","optionLabel":"10 Foot Ladder"},{"optionValue":"Drop Cloth","optionLabel":"Drop Cloth"}],"type":"selectlist"},{"value":"","label":"Comments","name":"Comments","type":"textarea"}]}');
+		 powerWashing.save();
+		 
 		 
     }
     def destroy = {

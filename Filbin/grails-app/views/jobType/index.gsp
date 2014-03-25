@@ -24,9 +24,9 @@
 		<tbody>
 		<g:each in="${jobTypeInstanceList}" status="i" var="jobTypeInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-				<td>${fieldValue(bean: jobTypeInstance, field: "name")}</td>			
-				<td><g:link action="show" id="${jobTypeInstance.id}">${fieldValue(bean: jobTypeInstance, field: "dateCreated")}</g:link></td>
-				<td><g:formatDate date="${jobTypeInstance.lastUpdated}" /></td>
+				<td><g:link action="show" id="${jobTypeInstance.id}">${fieldValue(bean: jobTypeInstance, field: "name")}</g:link></td>			
+				<td>${fieldValue(bean: jobTypeInstance, field: "dateCreated") }</td>
+				<td>${fieldValue(bean: jobTypeInstance, field: "lastUpdated") }</td>
 			</tr>
 		</g:each>
 		</tbody>

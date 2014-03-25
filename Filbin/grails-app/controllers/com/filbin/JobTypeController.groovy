@@ -2,6 +2,7 @@ package com.filbin
 
 
 import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
 import grails.transaction.Transactional
 
 /**
@@ -57,6 +58,10 @@ class JobTypeController {
     def edit(JobType jobTypeInstance) {
         respond jobTypeInstance
     }
+	
+	def getJobTypeById(JobType jobTypeInstance){
+		render jobTypeInstance as JSON
+	}
 
     @Transactional
     def update(JobType jobTypeInstance) {

@@ -11,87 +11,35 @@
 	<link rel="stylesheet" href="${resource(dir: 'DynamicForm/WebContent/styles', file: 'dynamicform.css')}" type="text/css">
 	<link rel="stylesheet" href="${resource(dir: 'DynamicForm/WebContent/styles', file: 'bootstrap.min.css')}" type="text/css">
 	
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script>
-      <script src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js'></script>
-    <![endif]-->
-    <script type="text/javascript">
-	$(document).ready(function() {
-		kks.DynamicFormApp.initialize( {
-			'save' : function() {
-				$("#jsonFormText").val((JSON.stringify(arguments)));
-				$("[name='jobTypeForm']").submit();		
-			},
-			'load' : function() {
-				
-				console.log('load!', arguments);
-			}
-
-
-			
+	<script>
+		$(document).ready(function() {
+			kks.DynamicFormApp.initialize();
+			var url = '${createLink(controller : 'jobType', action:'getJobTypeById', params: [id:jobTypeInstance.id])}';
+			$.getJSON(url, function(data) {
+				var container = $('#jobTypes');
+				console.log(data.jsonFormText);
+					var form = (JSON.parse(data.jsonFormText))['0'];
+					var job = $('<div/>', {className:'job'});
+					
+					for(var i = 0; i < form.length; i++) {
+						
+						var id = form[i].type;
+						kks.pageController.addTemplateToContainer(id, form[i], job);
+						$('#jobTypes').append(job);
+						
+					}
+			});
 		});
-
-		console.log(kks);
-	});
 	</script>
 </head>
 <body>
 
 <section id="show-jobType" class="first">
 
-	<table class="table">
-		<tbody>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="jobType.dateCreated.label" default="Date Created" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${jobTypeInstance?.dateCreated}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="jobType.lastUpdated.label" default="Last Updated" /></td>
-				
-				<td valign="top" class="value"><g:formatDate date="${jobTypeInstance?.lastUpdated}" /></td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="jobType.name.label" default="Name" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: jobTypeInstance, field: "name")}</td>
-				
-			</tr>
-			
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="jobType.jsonFromText.label" default="Form JSON" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: jobTypeInstance, field: "jsonFormText")}</td>
-				
-			</tr>
-		
-		</tbody>
-	</table>
+	<h2>${jobTypeInstance.name}</h2>
+	(View Only)
 	
-  	
-  	<div id='content'>
-  		<%--<button class='js-save-form'>Save Form</button>
-  		<button class='js-load-form'>Load Form</button>
-  		
-  	--%>
-  		<button class='js-load-form'>Load Form</button>
-  	</div>
-  	
-  	<div style="clear:both; margin-bottom:40px;"></div>
-  	
-	<div class="form-actions margin-top-medium">
-		<g:submitButton name="create" class="btn btn-primary js-save-form" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-           <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
-	</div>
-  	
-  	<div class='templates'>
+  <div class='templates' style="padding-top:30px;">
   		<div id='inputbox' class='template'>
   			<div class='form-group form-element'>
 	  			<label>
@@ -110,35 +58,34 @@
   		</div>
   		<div id='radiogroup' class='template'>
   			<div class='form-group form-element'>
-  				<span class='label'>{{label}}</span>
+  				<label>{{label}}</label>
 	  			<div class='js-option-container'>
 	  			</div>
 	  		</div>
   		</div>
   		<div id='dropdown' class='template'>
   			<div class='form-group form-element'>
-  				<span class='label'>{{label}}</span>
+  				<label>{{label}}</label>
   				<select class='form-control js-option-container'></select>
   			</div>
   		</div>
   		<div id='selectlist' class='template'>
   			<div class='form-group form-element'>
-	  			<span class='label'>{{label}}</span>
+	  			<label>{{label}}</label>
   				<select multiple class='form-control js-option-container'></select>
 	  		</div>
   		</div>
   		<div id='checkbox' class='template'>
   			<div class='form-group form-element'>
-	  			<label>
-	  				<input type='checkbox' name={{name}} value={{value}} class='form-control'>{{label}}
-	  			</label>
+	  			<label>{{label}}</label>
+	  			<input type='checkbox' name={{name}} value={{value}} class='form-control'>
 	  		</div>
   		</div>
   		
   		<div id='aradio' class='template'>
   			<div class='radio'>
+  				<label>{{label}}</label>
   				<input type='radio' name={{optionName}} value={{optionValue}}>
-  				<span class='label'>{{optionLabel}}</span>
   			</div>
   		</div>
   		
@@ -153,25 +100,18 @@
 			</ul>
   		</div>
   	</div>
+
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    
+  </ul>
+  <div class="tab-content">
+  </div><!-- /.tab-content -->
+</div><!-- /.tabbable -->
+
+<div id='jobTypes'></div>
   	
-  	<div class='dialogs'>
-		<div id='formelementeditor' class='modal fade'>
-			<div class='modal-dialog'>
-				<div class='modal-content'>
-					<div class='modal-header'>
-						<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
-						<h4 class='modal-title'>Modal title</h4>
-					</div>
-					<div class='modal-body'>
-					</div>
-					<div class='modal-footer'>
-						<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-						<button type='button' class='btn btn-primary'>Save changes</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  	
 	
 </section>
 
