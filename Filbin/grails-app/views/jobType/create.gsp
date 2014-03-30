@@ -20,9 +20,9 @@
 	$(document).ready(function() {
 		kks.DynamicFormApp.initialize( {
 			'save' : function() {
-				console.log(arguments);
+				//console.log(arguments);
 				$("#jsonFormText").val((JSON.stringify(arguments)));
-				//$("[name='jobTypeForm']").submit();		
+				$("[name='jobTypeForm']").submit();		
 			},
 			'load' : function() {
 				console.log('load!', arguments);
