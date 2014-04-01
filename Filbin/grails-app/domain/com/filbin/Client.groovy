@@ -12,13 +12,14 @@ class Client {
 	String notes;
 	Date dateCreated;
 	ClientType type;
-	String test; 
 	
 	
 	static	constraints = {
 		name(blank:false)
-		emailAddress(email: true)
-		notes(maxSize: 2000)
+		emailAddress(email: true, blank:true)
+		notes(maxSize: 2000, blank:true)
+		address(blank:true)
+		phoneNumber(blank:true)
     }
 	
 	

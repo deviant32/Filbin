@@ -15,6 +15,8 @@
 	<link rel="apple-touch-icon"	href="assets/ico/apple-touch-icon.png">
     <link rel="apple-touch-icon"	href="assets/ico/apple-touch-icon-72x72.png"	sizes="72x72">
     <link rel="apple-touch-icon"	href="assets/ico/apple-touch-icon-114x114.png"	sizes="114x114">
+    
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap3-wysiwyg5.css')}" />
 	
 	<%-- Manual switch for the skin can be found in /view/_menu/_config.gsp --%>
 	<r:require modules="jquery"/> <%-- jQuery is required for Bootstrap! --%>
@@ -26,7 +28,7 @@
     	window.kks = {};
     	kks.isProduction = true;
     </script>
-
+    
 	<r:layoutResources />
 	<g:layoutHead />
 
@@ -39,7 +41,13 @@
 </head>
 
 <body>
-	<g:render template="/_menu/navbar"/>														
+	<g:render template="/_menu/navbar"/>	
+	
+	<div class="jumbotron" style="text-align:center">
+	  <a href='<g:createLink controller="client" action="create" />' class="btn btn-primary btn-lg" role="button" style="margin-right:10px;">New Client</a>
+	  <a href='<g:createLink controller="proposal" action="create" />' class="btn btn-primary btn-lg" role="button" style="margin-right:10px;">New Proposal</a>
+	  <a href='<g:createLink controller="quote" action="create" />' class="btn btn-primary btn-lg" role="button">New Quote</a>
+	</div>													
 
 	<!-- Enable to overwrite Header by individual page -->
 	<g:if test="${ pageProperty(name:'page.header') }">
@@ -86,6 +94,14 @@
     <!-- Base -->
     <script src='${resource(dir: 'DynamicForm/WebContent/javascript/src', file: 'elements.js')}'></script>
     <script src='${resource(dir: 'DynamicForm/WebContent/javascript/src', file: 'app.js')}'></script>
+    <script src='${resource(dir: 'js', file: 'wysihtml5-0.3.0.js')}'></script>
+    <script src='${resource(dir: 'js', file: 'bootstrap3-wysihtml5.js')}'></script>
+    
+    <script type="text/javascript">
+		$(document).ready(function(){
+			$('.textarea').wysihtml5();
+		});
+	</script>
     
     
 </body>

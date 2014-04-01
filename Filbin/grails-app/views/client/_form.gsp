@@ -42,14 +42,6 @@
 				</div>
 			</div>
 
-			<div class="${hasErrors(bean: clientInstance, field: 'test', 'error')} ">
-				<label for="test" class="control-label"><g:message code="client.test.label" default="Test" /></label>
-				<div>
-					<g:textField class="form-control" name="test" value="${clientInstance?.test}"/>
-					<span class="help-inline">${hasErrors(bean: clientInstance, field: 'test', 'error')}</span>
-				</div>
-			</div>
-
 			<div class="${hasErrors(bean: clientInstance, field: 'type', 'error')} required">
 				<label for="type" class="control-label"><g:message code="client.type.label" default="Type" /><span class="required-indicator">*</span></label>
 				<div>
