@@ -3,6 +3,7 @@ package com.filbin
 
 import static org.springframework.http.HttpStatus.*
 import grails.converters.JSON
+import grails.plugin.springsecurity.annotation.Secured;
 import grails.transaction.Transactional
 
 /**
@@ -10,6 +11,7 @@ import grails.transaction.Transactional
  * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
  */
 @Transactional(readOnly = true)
+@Secured(['ROLE_ADMIN'])
 class JobTypeController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]

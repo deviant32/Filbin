@@ -1,9 +1,12 @@
+
 <%--<ul class="nav pull-right">--%>
 	<li class="dropdown">
 	
 <%--<sec:ifNotLoggedIn>--%>
 
-		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+		<sec:ifNotLoggedIn>
+		  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
 			<!-- TODO: integrate Springsource Security etc. and show User's name ... -->
     		<i class="glyphicon glyphicon-user"></i>
     		<g:message code="security.signin.label"/><b class="caret"></b>
@@ -26,6 +29,12 @@
 				<g:render template="/_common/modals/registerTextLink"/>
 			</li>
 		</ul>
+		</sec:ifNotLoggedIn>
+		<sec:ifAllGranted roles="ROLE_ADMIN">
+		  <g:link controller="logout">Logout (<sec:username />)</g:link>
+		</sec:ifAllGranted>
+
+		
 
 <%--</sec:ifNotLoggedIn>--%>
 <%--<sec:ifLoggedIn>--%>

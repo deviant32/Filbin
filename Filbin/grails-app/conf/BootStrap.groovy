@@ -3,10 +3,17 @@ import com.filbin.ClientType
 import com.filbin.Footer
 import com.filbin.JobType
 import com.filbin.LetterHead
+import com.filbin.Role
+import com.filbin.SecurityMap
+import com.filbin.User
+import com.filbin.UserRole
 
 class BootStrap {
+	
+	def springSecurityService
 
     def init = { servletContext ->
+		
 		
 		 ClientType res = new ClientType(type: "Residential");
 		 res.save();
@@ -45,6 +52,23 @@ class BootStrap {
 		 
 		 JobType powerWashing = new JobType(name:"Residential Power Washing", jsonFormText:'{"0":[{"value":"","label":"Square Footage","name":"squarefootage","type":"inputbox"},{"value":"","label":"Estimated Time","name":"time","type":"inputbox"},{"label":"Materials","name":"","fieldOptions":[{"optionValue":"Hose Extension","optionLabel":"Hose extension"},{"optionValue":"Chemicals","optionLabel":"Chemicals"},{"optionValue":"6 Foot Ladder","optionLabel":"6 Foot Ladder"},{"optionValue":"8 Foot Ladder","optionLabel":"8 Foot Ladder"},{"optionValue":"10 Foot Ladder","optionLabel":"10 Foot Ladder"},{"optionValue":"Drop Cloth","optionLabel":"Drop Cloth"}],"type":"selectlist"},{"value":"","label":"Comments","name":"Comments","type":"textarea"}]}');
 		 powerWashing.save();
+		 
+		 
+		 def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
+         def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
+
+         def testUser = new User(username: 'admin', password: 'admin')
+         testUser.save(flush: true)
+
+         UserRole.create testUser, adminRole, true
+
+         assert User.count() == 1
+         assert Role.count() == 2
+         assert UserRole.count() == 1
+			 
+			 
+		 
+		
 		 
 		 
     }
