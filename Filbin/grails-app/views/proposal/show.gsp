@@ -56,21 +56,6 @@
 
 <body>
 
-<section id="show-proposal" class="first">
-
-	<table class="table">
-		<tbody>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="proposal.client.label" default="Client" /></td>
-				
-				<td valign="top" class="value"><g:link controller="client" action="show" id="${proposalInstance?.client?.id}">${proposalInstance?.client?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
-		
-		</tbody>
-	</table>
-</section>
 
 <div class='templates'>
   		<div id='inputbox' class='template'>
@@ -99,13 +84,13 @@
   		<div id='dropdown' class='template'>
   			<div class='form-group form-element'>
   				<label>{{label}}</label>
-  				<select class='form-control js-option-container'></select>
+  				<select name={{name}} class='form-control js-option-container'></select>
   			</div>
   		</div>
   		<div id='selectlist' class='template'>
   			<div class='form-group form-element'>
 	  			<label>{{label}}</label>
-  				<select multiple class='form-control js-option-container'></select>
+  				<select multiple name={{name}} class='form-control js-option-container'></select>
 	  		</div>
   		</div>
   		<div id='checkbox' class='template'>
@@ -133,8 +118,9 @@
 			</ul>
   		</div>
   	</div>
-
-<div class="tabbable">
+<h2>${proposalInstance?.client?.encodeAsHTML()}</h2>
+<g:form id="jobTypes" controller="proposal" method="post" action="saveData">
+<div class="tabbable" style="margin-top:50px;">
   <ul class="nav nav-tabs">
     
   </ul>
@@ -142,7 +128,13 @@
   </div><!-- /.tab-content -->
 </div><!-- /.tabbable -->
 
-<div id='jobTypes'></div>
+
+
+
+	<button type="submit" class="btn btn-default">Submit</button>
+</g:form>
+
+
 
 </body>
 

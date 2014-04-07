@@ -37,6 +37,14 @@ class ProposalController {
     def create() {
         respond new Proposal(params)
     }
+	
+	@Transactional
+	def saveData(){
+		params.each { name, value ->
+			log.println name
+		}
+		return
+	}
 
     @Transactional
     def save(Proposal proposalInstance) {
