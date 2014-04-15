@@ -60,13 +60,6 @@
 			</tr>
 		
 			<tr class="prop">
-				<td valign="top" class="name"><g:message code="client.test.label" default="Test" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: clientInstance, field: "test")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
 				<td valign="top" class="name"><g:message code="client.type.label" default="Type" /></td>
 				
 				<td valign="top" class="value"><g:link controller="clientType" action="show" id="${clientInstance?.type?.id}">${clientInstance?.type?.encodeAsHTML()}</g:link></td>

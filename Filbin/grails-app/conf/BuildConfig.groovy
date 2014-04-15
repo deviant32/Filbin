@@ -5,6 +5,9 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
+
+grails.project.war.exploded.dir = "C:\\Users\\Joe\\proposal\\webapps\\ROOT"
+grails.war.exploded=true
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 grails.project.fork = [
@@ -61,6 +64,7 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.0.2"
         compile ':cache:1.1.1'
 		compile ":spring-security-core:2.0-RC2"
+		compile ":mysql-connectorj:5.1.22.1"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate:3.6.10.8" // or ":hibernate4:4.3.1.1"

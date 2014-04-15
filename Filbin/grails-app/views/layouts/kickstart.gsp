@@ -46,8 +46,8 @@
 	<div class="jumbotron" style="text-align:center">
 	  <a href='<g:createLink controller="client" action="create" />' class="btn btn-primary btn-lg" role="button" style="margin-right:10px;">New Client</a>
 	  <a href='<g:createLink controller="proposal" action="create" />' class="btn btn-primary btn-lg" role="button" style="margin-right:10px;">New Proposal</a>
-	  <a href='<g:createLink controller="quote" action="create" />' class="btn btn-primary btn-lg" role="button">New Quote</a>
-	</div>													
+	  <%--<a href='<g:createLink controller="quote" action="create" />' class="btn btn-primary btn-lg" role="button">New Quote</a>
+	--%></div>													
 
 	<!-- Enable to overwrite Header by individual page -->
 	<g:if test="${ pageProperty(name:'page.header') }">

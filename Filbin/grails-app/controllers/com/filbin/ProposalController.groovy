@@ -10,7 +10,7 @@ import grails.transaction.Transactional
  * ProposalController
  * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
  */
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 @Secured(['ROLE_ADMIN'])
 class ProposalController {
 
@@ -38,12 +38,26 @@ class ProposalController {
         respond new Proposal(params)
     }
 	
-	@Transactional
 	def saveData(){
+		
+		
+		log.println ("Proposal ID: "+params.proposalId);
+		
+		Proposal p = Proposal.get(params.proposalId)
+		
 		params.each { name, value ->
-			log.println name
+			if(name != "proposalId"){
+				ProposalValue pv = new ProposalValue();
+				pv.setName(name)
+				pv.setValue(value)
+
+				p.addToProposalValues(pv)
+			}
+			
+			p.save();
 		}
-		return
+		
+		respond ProposalValue.list(), model:[proposalValueInstanceCount: ProposalValue.count()]
 	}
 
     @Transactional

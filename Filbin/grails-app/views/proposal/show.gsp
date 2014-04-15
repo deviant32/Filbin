@@ -8,9 +8,9 @@
 	<g:set var="entityName" value="${message(code: 'proposal.label', default: 'Proposal')}" />
 	<title><g:message code="default.show.label" args="[entityName]" /></title>
 	<link rel="stylesheet" href="${resource(dir: 'DynamicForm/WebContent/styles', file: 'dynamicform.css')}" type="text/css">
-	<link rel="stylesheet" href="${resource(dir: 'DynamicForm/WebContent/styles', file: 'bootstrap.min.css')}" type="text/css">
 	<style type="text/css">
-		.tab-content{padding:20px;}
+		.tab-content{padding-top:20px;}
+		.nav-tabs{border-bottom:0px;}
 	</style>
 	
 	<script>
@@ -24,7 +24,6 @@
 				
 				for(var j = 0; j < data.length; j++) {
 					var form = (JSON.parse(data[j].jsonFormText))['0'];
-					console.log(data[j].name);
 					var job = $('<div/>', {className:'job'});
 					//var title = $('<h2>Job Type</h2>');
 					
@@ -119,7 +118,7 @@
   		</div>
   	</div>
 <h2>${proposalInstance?.client?.encodeAsHTML()}</h2>
-<g:form id="jobTypes" controller="proposal" method="post" action="saveData">
+<g:form controller="proposal" method="post" action="saveData">
 <div class="tabbable" style="margin-top:50px;">
   <ul class="nav nav-tabs">
     
@@ -132,6 +131,7 @@
 
 
 	<button type="submit" class="btn btn-default">Submit</button>
+	<g:hiddenField name="proposalId" value="${proposalInstance.id}"/>
 </g:form>
 
 

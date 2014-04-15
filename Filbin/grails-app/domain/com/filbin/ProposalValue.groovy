@@ -1,23 +1,23 @@
 package com.filbin
 
 /**
- * Proposal
+ * ProposalValue
  * A domain class describes the data object and it's mapping to the database
  */
-class Proposal {
+class ProposalValue {
 
 	/* Default (injected) attributes of GORM */
 //	Long	id
 //	Long	version
 	
 	/* Automatic timestamping of GORM */
-	String name
-	Date	dateCreated
-	Date	lastUpdated
+//	Date	dateCreated
+//	Date	lastUpdated\\
+	static belongsTo    = [proposal:Proposal]
+	String name;
+	String value;
 	
-	static	belongsTo	= [client:Client]	// tells GORM to cascade commands: e.g., delete this object if the "parent" is deleted.
-	static hasMany = [jobTypes:JobType, proposalValues:ProposalValue]
-	
+//	static	belongsTo	= []	// tells GORM to cascade commands: e.g., delete this object if the "parent" is deleted.
 //	static	hasOne		= []	// tells GORM to associate another domain object as an owner in a 1-1 mapping
 //	static	hasMany		= []	// tells GORM to associate other domain objects for a 1-n or n-m mapping
 //	static	mappedBy	= []	// specifies which property should be used in a mapping 
@@ -27,17 +27,14 @@ class Proposal {
     
 	static	constraints = {
 		name(blank:false)
-		client(blank:false)
-		proposalValues(blank:true)
-		
+		value(blank:false)
     }
-
-	String toString(){
-		return name;
-	}
 	
-	public void addToProposalValues(ProposalValue p){
-		this.proposalValues.add(p)
-	}
-
+	/*
+	 * Methods of the Domain Class
+	 */
+//	@Override	// Override toString for a nicer / more descriptive UI 
+//	public String toString() {
+//		return "${name}";
+//	}
 }

@@ -17,8 +17,10 @@
 		<thead>
 			<tr>
 			
+				<g:sortableColumn property="name" title="${message(code: 'proposal.name.label', default: 'Proposal Name')}" />
+				
 				<th><g:message code="proposal.client.label" default="Client" /></th>
-			
+				
 				<g:sortableColumn property="dateCreated" title="${message(code: 'proposal.dateCreated.label', default: 'Date Created')}" />
 			
 				<g:sortableColumn property="lastUpdated" title="${message(code: 'proposal.lastUpdated.label', default: 'Last Updated')}" />
@@ -29,8 +31,10 @@
 		<g:each in="${proposalInstanceList}" status="i" var="proposalInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
+				<td><g:link action="show" id="${proposalInstance.id}">${fieldValue(bean: proposalInstance, field: "name")}</g:link></td>
+				
 				<td><g:link action="show" id="${proposalInstance.id}">${fieldValue(bean: proposalInstance, field: "client")}</g:link></td>
-			
+				
 				<td><g:formatDate date="${proposalInstance.dateCreated}" /></td>
 			
 				<td><g:formatDate date="${proposalInstance.lastUpdated}" /></td>
