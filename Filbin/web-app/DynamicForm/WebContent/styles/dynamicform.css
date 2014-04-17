@@ -9,33 +9,10 @@
 }
 .form-element {
 	position: relative;
+	margin-bottom: 50px;
 }
-.form-element:hover {
-
-}
-.form-element-controls {
-	position: absolute;
-	right: 0;
-	background-color: white;
-	display: none;
-}
-.hovered .form-element-controls {
+.edit-control {
 	display: block;
-}
-.form-element-controls > li {
-	display: inline-block;
-	padding: 2px;
-	cursor: pointer;
-}
-.form-element-controls .edit-control {
-	width: 24px;
-	height: 24px;
-	background-image: url('../images/edit_24.png');
-}
-.form-element-controls .delete-control {
-	width: 24px;
-	height: 24px;
-	background-image: url('../images/delete.png');
 }
 
 /*

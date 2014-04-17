@@ -7,23 +7,23 @@ kks.FormElementBase = function(container, options) {
 };
 kks.FormElementBase.prototype = {
 	constructor : kks.FormElementBase,
-	setText : function(text) {
-		
-	},
-	getValue : function() {
-		
-	},
-	setValue : function(val) {
-		
+	update : function(o) {
+		if(o.label) {
+			this.dom.find('label').text(o.label);
+		}
+		if(o.value) {
+			this.dom.find('input').val(o.value);
+		}
 	},
 	remove : function() {
 		this.dom.remove();
 	},
 	toJson : function() {
+		var label = this.dom.find('label').text().trim();
 		return {
 			'value' : this.dom.find('input').val().trim(),
-			'label' : this.dom.find('label').text().trim(),
-			'name'  : this.dom.find('input').attr('name').trim(),
+			'label' : label,
+			'name'  : label,
 			'type'  : this._type
 		};
 	}
@@ -50,12 +50,21 @@ kks.TextArea = function(container, options) {
 kks.TextArea.inherit(kks.FormElementBase);
 
 kks.TextArea.prototype.toJson = function() {
+	var label = this.dom.find('label').text().trim();
 	return {
 		'value' : this.dom.find('textarea').val().trim(),
-		'label' : this.dom.find('label').text().trim(),
-		'name'  : this.dom.find('textarea').attr('name').trim(),
+		'label' : label,
+		'name'  : label,
 		'type'  : this._type
 	};
+};
+kks.TextArea.prototype.update = function(o) {
+	if(o.label) {
+		this.dom.find('label').text(o.label);
+	}
+	if(o.value) {
+		this.dom.find('textarea').val(o.value);
+	}
 };
 /**
  * ==========================================================================
@@ -69,9 +78,10 @@ kks.RadioGroup = function(container, options) {
 kks.RadioGroup.inherit(kks.FormElementBase);
 
 kks.RadioGroup.prototype.toJson = function() {
+	var label = this.dom.find('label').text().trim();
 	var ret = {
-		'label'   : this.dom.find('label').text().trim(),
-		'name'    : this.dom.find('input').first().attr('name').trim(),
+		'label'   : label,
+		'name'    : label,
 		'fieldOptions' : [],
 		'type'    : this._type
 	};
@@ -82,6 +92,21 @@ kks.RadioGroup.prototype.toJson = function() {
 		});
 	});
 	return ret;
+};
+kks.RadioGroup.prototype.update = function(o) {
+	if(o.label) {
+		this.dom.find('label').text(o.label);
+	}
+	if(o.fieldOptions) {
+		var opts = o.fieldOptions,
+			i = 0,
+			len = opts.length;
+		for(; i < len; i++) {
+			var radio = this.dom.find('.radio').eq(i);
+			radio.find('input').val(opts[i].optionValue);
+			radio.find('.label').text(opts[i].optionLabel);
+		}
+	}
 };
 /**
  * ==========================================================================
@@ -95,9 +120,10 @@ kks.DropDownSelect = function(container, options) {
 kks.DropDownSelect.inherit(kks.FormElementBase);
 
 kks.DropDownSelect.prototype.toJson = function() {
+	var label = this.dom.find('label').text().trim();
 	var ret = {
-		'label' : this.dom.find('.label').text().trim(),
-		'name'  : '',
+		'label' : label,
+		'name'  : label,
 		'fieldOptions' : [],
 		'type' : this._type
 	};
@@ -108,6 +134,21 @@ kks.DropDownSelect.prototype.toJson = function() {
 		});
 	});
 	return ret;
+};
+kks.DropDownSelect.prototype.update = function(o) {
+	if(o.label) {
+		this.dom.find('label').text(o.label);
+	}
+	if(o.fieldOptions) {
+		var opts = o.fieldOptions,
+			i = 0,
+			len = opts.length;
+		for(; i < len; i++) {
+			this.dom.find('option').eq(i)
+					.val(opts[i].optionValue)
+					.text(opts[i].optionLabel);
+		}
+	}
 };
 /**
  * ==========================================================================
@@ -121,9 +162,10 @@ kks.SelectList = function(container, options) {
 kks.SelectList.inherit(kks.FormElementBase);
 
 kks.SelectList.prototype.toJson = function() {
+	var label = this.dom.find('label').text().trim();
 	var ret = {
-		'label' : this.dom.find('.label').text().trim(),
-		'name' : '',
+		'label' : label,
+		'name'  : label,
 		'fieldOptions' : [],
 		'type' : this._type
 	};
@@ -135,6 +177,21 @@ kks.SelectList.prototype.toJson = function() {
 	});
 	return ret;
 };
+kks.SelectList.prototype.update = function(o) {
+	if(o.label) {
+		this.dom.find('label').text(o.label);
+	}
+	if(o.fieldOptions) {
+		var opts = o.fieldOptions,
+			i = 0,
+			len = opts.length;
+		for(; i < len; i++) {
+			this.dom.find('option').eq(i)
+					.val(opts[i].optionValue)
+					.text(opts[i].optionLabel);
+		}
+	}
+};
 /**
  * ==========================================================================
  * 
@@ -145,8 +202,16 @@ kks.CheckBox = function(container, options) {
 	this._type = 'checkbox';
 };
 kks.CheckBox.inherit(kks.FormElementBase);
-
-
+/**
+ * ==========================================================================
+ * 
+ * ==========================================================================
+ */
+kks.CalculatedField = function(container, options) {
+	this._super.constructor.apply(this, arguments);
+	this._type = 'calculatedfield';
+};
+kks.CalculatedField.inherit(kks.FormElementBase);
 
 /**
  * ==========================================================================
@@ -160,7 +225,7 @@ kks.FormElementBase.config = {
 	'inputbox' : {
 		'obj' : 'kks.InputBox',
 		'value' : '',
-		'name' : '{replace}',
+		'name' : '',
 		'label' : '{replace}',
 		'needOptions' : false,
 		'title' : 'Input Box'
@@ -168,7 +233,7 @@ kks.FormElementBase.config = {
 	'textarea' : {
 		'obj' : 'kks.TextArea',
 		'value' : '',
-		'name' : '{replace}',
+		'name' : '',
 		'label' : '{replace}',
 		'needOptions' : false,
 		'title' : 'Text Area'
@@ -203,9 +268,17 @@ kks.FormElementBase.config = {
 	'checkbox' : {
 		'obj' : 'kks.CheckBox',
 		'value' : '{replace}',
-		'name' : '{replace}',
+		'name' : '',
 		'label' : '{replace}',
 		'needOptions' : false,
 		'title' : 'Checkbox'
-	}
+	},
+	'calculatedfield' : {
+		'obj' : 'kks.CalculatedField',
+		'value' : '',
+		'name' : '',
+		'label' : '{replace}',
+		'needOptions' : false,
+		'title' : 'Calculated Field (Price Per)'
+	},
 };
