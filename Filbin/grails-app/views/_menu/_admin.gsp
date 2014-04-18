@@ -28,26 +28,29 @@
 		  	<g:link controller="paragraph" action="index">
 				<g:message code="paragraph" default="Quote Text"/>
 			</g:link>
-		</li>		
+		</li>	
 		
 		
-		
-		
-		
-		<g:if env="development">
+		<sec:ifAnyGranted roles="ROLE_ADMIN">
 		<hr>
+		<li class="">
+			<a href="${createLink(uri: '/user')}">
+			<i class="glyphicon glyphicon-user"></i>
+				User Management
+			</a>
+		</li>
 		<li class="">
 			<a href="${createLink(uri: '/dbconsole')}">
 				<i class="glyphicon glyphicon-dashboard"></i>
 				<g:message code="default.dbconsole.label"/>
 			</a>
 		</li>
-		</g:if>
 		<li class="">
 			<a href="${createLink(uri: '/systeminfo')}">
 				<i class="glyphicon glyphicon-info-sign"></i>
 				<g:message code="default.systeminfo.label"/>
 			</a>
 		</li>
+		</sec:ifAnyGranted>
 	</ul>
 </li>

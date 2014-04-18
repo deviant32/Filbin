@@ -1,4 +1,4 @@
-	<div class="container" style="margin-top:30px;">
+	<div class="container" style="margin-top:30px; margin-bottom:30px;">
 		<ul class="nav nav-pills">
 		  <li class="controller${params.controller == 'home' ? " active" : ""}">
 		  	<g:link controller="home" action="index">

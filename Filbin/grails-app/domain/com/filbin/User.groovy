@@ -6,6 +6,7 @@ class User {
 
 	String username
 	String password
+	String emailAddress
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
@@ -16,6 +17,7 @@ class User {
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
+		emailAddress blank:false, emailAddress : true 
 	}
 
 	static mapping = {
@@ -38,5 +40,9 @@ class User {
 
 	protected void encodePassword() {
 		password = springSecurityService.encodePassword(password)
+	}
+	
+	String toString(){
+		return this.username;
 	}
 }

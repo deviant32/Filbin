@@ -23,16 +23,22 @@
 				
 			</tr>
 		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="letterHead.contents.label" default="Contents" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: letterHeadInstance, field: "contents")}</td>
-				
-			</tr>
+			
 		
 		</tbody>
 	</table>
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Preview</h3>
+	  </div>
+	  <div class="panel-body">
+	    <%= letterHeadInstance.contents %>
+	  </div>
+	</div>
+
 </section>
+
+
 
 </body>
 

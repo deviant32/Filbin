@@ -15,11 +15,11 @@ class Client {
 	
 	
 	static	constraints = {
-		name(blank:false)
-		emailAddress(email: true, blank:true)
-		notes(maxSize: 2000, blank:true)
-		address(blank:true)
-		phoneNumber(blank:true)
+		name(nullable:false)
+		emailAddress(email: true, nullable:true)
+		notes(maxSize: 2000, nullable:true)
+		address(nullable:true)
+		phoneNumber(nullable:true)
     }
 	
 	

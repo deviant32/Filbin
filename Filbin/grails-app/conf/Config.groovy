@@ -52,8 +52,8 @@ grails {
             encoding = 'UTF-8'
             htmlcodec = 'xml' // use xml escaping instead of HTML4 escaping
             codecs {
-                expression = 'html' // escapes values inside ${}
-                scriptlet = 'html' // escapes output from scriptlets in GSPs
+                //expression = 'html' // escapes values inside ${}
+                //scriptlet = 'html' // escapes output from scriptlets in GSPs
                 taglib = 'none' // escapes output from taglibs
                 staticparts = 'none' // escapes output from static template parts
             }
@@ -63,6 +63,7 @@ grails {
     }
 }
 
+grails.views.default.codec = "html"
  
 grails.converters.encoding = "UTF-8"
 // scaffolding templates configuration
@@ -113,6 +114,21 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
+
+grails.plugin.springsecurity.interceptUrlMap = [
+	'/index':             ['permitAll'],
+	'/index.gsp':         ['permitAll'],
+	'/**/js/**':          ['permitAll'],
+	'/**/css/**':         ['permitAll'],
+	'/**/images/**':      ['permitAll'],
+	'/**/favicon.ico':    ['permitAll'],
+	'/login/**':          ['permitAll'],
+	'/logout/**':         ['permitAll'],
+	'/**':         ['ROLE_ADMIN'],
+	'/':         ['ROLE_ADMIN'],
+ ]
 
 
 // Added by the Spring Security Core plugin:

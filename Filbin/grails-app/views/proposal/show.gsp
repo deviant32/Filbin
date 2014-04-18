@@ -9,7 +9,7 @@
 	<title><g:message code="default.show.label" args="[entityName]" /></title>
 	<link rel="stylesheet" href="${resource(dir: 'DynamicForm/WebContent/styles', file: 'dynamicform.css')}" type="text/css">
 	<style type="text/css">
-		.tab-content{padding-top:20px;}
+		.tab-content{padding:20px;}
 		.nav-tabs{border-bottom:0px;}
 	</style>
 	

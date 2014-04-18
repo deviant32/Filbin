@@ -31,7 +31,7 @@
 		</ul>
 		</sec:ifNotLoggedIn>
 		<sec:ifAllGranted roles="ROLE_ADMIN">
-		  <g:link controller="logout">Logout (<sec:username />)</g:link>
+		  <g:link controller="logout"><i class="glyphicon glyphicon-log-out"></i><span style="margin-left:5px;">Logout (<sec:username />)</span></g:link>
 		</sec:ifAllGranted>
 
 		

@@ -17,21 +17,12 @@
     <link rel="apple-touch-icon"	href="assets/ico/apple-touch-icon-114x114.png"	sizes="114x114">
     
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap3-wysiwyg5.css')}" />
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap3-wysiwyg5-color.css')}" />
 	
 	<%-- Manual switch for the skin can be found in /view/_menu/_config.gsp --%>
 	<r:require modules="jquery"/> <%-- jQuery is required for Bootstrap! --%>
 	<r:require modules="bootstrap"/>
 	<r:require modules="bootstrap_utils"/>
 	
-	<style>hr{margin-bottom: 0px !important;margin-top: 0px !important;} </style>
-	
-	<script type='text/javascript'>
-    	//namespacing
-    	window.kks = {};
-    	kks.isProduction = true;
-    </script>
-    
 	<r:layoutResources />
 	<g:layoutHead />
 
@@ -44,25 +35,10 @@
 </head>
 
 <body>
-	<g:render template="/_menu/navbar"/>	
+	
 
-	<!-- Enable to overwrite Header by individual page -->
-	<g:if test="${ pageProperty(name:'page.header') }">
-   		<g:pageProperty name="page.header" />
-	</g:if>
-	<g:else>
-		<g:render template="/layouts/header"/>														
-	</g:else>
 
 	<g:render template="/layouts/content"/>														
-
-	<!-- Enable to overwrite Footer by individual page -->
-	<g:if test="${ pageProperty(name:'page.footer') }">
-	    <g:pageProperty name="page.footer" />
-	</g:if>
-	<g:else>
-		<g:render template="/layouts/footer"/>														
-	</g:else>
 
 	<!-- Enable to insert additional components (e.g., modals, javascript, etc.) by any individual page -->
 	<g:if test="${ pageProperty(name:'page.include.bottom') }">
@@ -93,7 +69,6 @@
     <script src='${resource(dir: 'DynamicForm/WebContent/javascript/src', file: 'app.js')}'></script>
     <script src='${resource(dir: 'js', file: 'wysihtml5-0.3.0.js')}'></script>
     <script src='${resource(dir: 'js', file: 'bootstrap3-wysihtml5.js')}'></script>
-    <script src='${resource(dir: 'js', file: 'wysihtml5-0.3.0.js')}'></script>
     
     <script type="text/javascript">
 		$(document).ready(function(){
