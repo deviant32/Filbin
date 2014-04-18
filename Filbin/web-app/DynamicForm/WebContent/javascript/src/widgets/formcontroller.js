@@ -71,6 +71,9 @@ kks.formController = (function() {
 			this._formElements[index].remove();
 			this._formElements[index] = null;
 			delete this._formElements[index];
+		},
+		hasElement : function(label) {
+			return this._container.find('label:contains('+label+')').exists();
 		}
 	};
 	$.extend(Controller, kks.observable);
@@ -108,38 +111,22 @@ kks.formController = (function() {
 	 */
 	Editor = function(container) {
 		this._container = container;
-		this._connectHandlers();
 	};
 	Editor.prototype = {
 		connectEditorControls : function(dom, formEle) {
 			var that = this;
-			dom.find('.edit-control').on('click', function() {
-				var config = {};
-				
-				
+			dom.on('click', function() {
+				//time for some crappy code because I want to finish this...
+				that._editing = formEle;
+				var config = formEle.toJson();
+				config.isLoad = true;
 				kks.pageController.notify('openEditorDialog',
-										  formEle,
-										  _.bind(that, that._editCallback));
-			});
-			dom.find('.delete-control').on('click', function() {
-				kks.pageController.notify('deleteFormElement', formEle);
+										  config,
+										  _.bind(that._editCallback, that));
 			});
 		},
-		_editCallback : function() {
-			
-		},
-		_onHover : function(ev) {
-			$(ev.currentTarget).addClass('hovered');
-		},
-		_onLeave : function(ev) {
-			$(ev.currentTarget).removeClass('hovered');
-		},
-		_connectHandlers : function() {
-			var that = this;
-			this._container.on({
-				mouseenter : _.bind(that._onHover, that),
-				mouseleave : _.bind(that._onLeave, that)
-			}, '.form-element');
+		_editCallback : function(o) {
+			if(o) this._editing.update(o);
 		}
 	};
 	

@@ -15,7 +15,7 @@ window.testjson = [
         "type": "textarea"
     },
     {
-        "label": "",
+        "label": "radio group label",
         "name": "options",
         "fieldOptions": [
             {

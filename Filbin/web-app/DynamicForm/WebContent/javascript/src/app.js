@@ -39,6 +39,9 @@ kks.DynamicFormApp = (function() {
 				aTemplate = kks.templateManager.template(id, json);
 			}
 			return new o($(aTemplate), json);
+		},
+		hasElement : function(label) {
+			return this._formController.hasElement(label);
 		}
 	};
 	$.extend(kks.pageController, kks.observable);

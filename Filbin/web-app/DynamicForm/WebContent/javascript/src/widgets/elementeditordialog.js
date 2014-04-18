@@ -28,16 +28,6 @@ kks.ElementEditorDialog.prototype = {
 			);
 		}
 		
-		if(config.name === this.REPLACE) {
-			appendents.push(
-				$('<div>').append(
-					$('<label>').text('Field Name:').append(
-						$('<input>').addClass('form-control')
-					)
-				).addClass('js-name')
-			);
-		}
-		
 		if(config.label === this.REPLACE) {
 			appendents.push(
 				$('<div>').append(
@@ -60,10 +50,6 @@ kks.ElementEditorDialog.prototype = {
 			);
 		}
 		
-		//Radio button is a different kind of element - all options must have
-		//the same name, so we need to do something a little different
-		this._isRadio = (config.title === 'Radio Group');
-		
 		var i, len;
 		for(i = 0, len = appendents.length; i < len; i++) {
 			appendents[i].addClass('input-group');
@@ -71,20 +57,60 @@ kks.ElementEditorDialog.prototype = {
 		}
 	},
 	setLoadedConfiguration : function(config) {
+		this._setTitle(kks.FormElementBase.config[config.type].title);
+		var appendents = [];
 		
+		if(config.label) {
+			appendents.push(
+				$('<div>').append(
+					$('<label>').text('Field Label:').append(
+						$('<input>').val(config.label).addClass('form-control')
+					)
+				).addClass('js-label')
+			);
+		}
+		
+		if(config.fieldOptions) {
+			var ref = $('<div>');
+			appendents.push(
+				ref.append(
+					$('<label>').text('Field Options: '),
+					$('<button>').text('Add Option').on('click', function() {
+						that._handleAddOption($(this).parent());
+					})
+				).addClass('js-options')
+			);
+			for(var i = 0; i < config.fieldOptions.length; i++) {
+				var opt = config.fieldOptions[i],
+					div = $('<div>').addClass('options-div'),
+					lbl1 = $('<label>').text('Option text').append(
+								$('<input>').val(opt.optionLabel).addClass('form-control')
+							),
+					lbl2 = $('<label>').text('Option value').append(
+								$('<input>').val(opt.optionValue).addClass('form-control')
+							);
+				ref.append(div.append(lbl1, lbl2));
+			}
+		}
+		
+		var i, len;
+		for(i = 0, len = appendents.length; i < len; i++) {
+			appendents[i].addClass('input-group');
+			this._body.append(appendents[i]);
+		}
+		
+		this._state = 'edit';
 	},
 	marshal : function() {
 		var valueEle  = this._container.find('.js-value'),
-			nameEle   = this._container.find('.js-name'),
 			labelEle  = this._container.find('.js-label'),
 			optionEle = this._container.find('.js-options'),
-			obj = {};
+			obj = {
+				'state' : this._state
+			};
 		
 		if(valueEle.exists()) {
 			obj.value = valueEle.find('input').val();
-		}
-		if(nameEle.exists()) {
-			obj.name = nameEle.find('input').val();
 		}
 		if(labelEle.exists()) {
 			obj.label = labelEle.find('input').val();
@@ -94,18 +120,19 @@ kks.ElementEditorDialog.prototype = {
 			optionEle.children('.options-div').each(function() {
 				var inputs = $(this).find('input');
 				var o = {
+					'optionName'  : obj.label,
 					'optionLabel' : inputs.eq(0).val(),
 					'optionValue' : inputs.eq(1).val()
 				};
-				if(inputs.eq(2).exists()) {
-					o.optionName = inputs.eq(2).val();
-				}
 				options.push(o);
 			});
 			obj.fieldOptions = options;
 		}
 		
 		return obj;
+	},
+	showError : function(message) {
+		this._container.find('.alert-message').html(message);
 	},
 	show : function() {
 		this._container.modal('show');
@@ -121,27 +148,15 @@ kks.ElementEditorDialog.prototype = {
 					),
 			lbl2 = $('<label>').text('Option value').append(
 						$('<input>').addClass('form-control')
-					),
-			lbl3 = (this._isRadio) ? $('<label>').text('Option name').append(
-										$('<input>').addClass('form-control')
-										.addClass('js-radio-option')
-									) : '';
-		container.append(div.append(lbl1, lbl2, lbl3));
-		
-		if(this._isRadio) {
-			this._container.find('.js-radio-option').on(
-				'input', _.bind(this._handleRadioNameInput, this)
-			);
-		}
-	},
-	_handleRadioNameInput : function(ev) {
-		this._container.find('.js-radio-option').val($(ev.currentTarget).val());
+					);
+		container.append(div.append(lbl1, lbl2));
 	},
 	_setTitle : function(title) {
 		this._container.find('.modal-title').text(title);
 	},
 	_clear : function() {
 		this._body.children().remove();
+		this._state = 'new';
 	},
 	_connectHandlers : function() {
 		var that = this;
@@ -193,8 +208,13 @@ kks.ElementEditorDialogController.prototype = {
 		this._callback(null);
 	},
 	submit : function() {
-		this._view.close();
 		var obj = this._view.marshal();
+		if(obj.state === 'new' && kks.pageController.hasElement(obj.label)) {
+			this._view.showError('Label already exists.'
+								 + ' Please enter a unique label.');
+			return;
+		}
+		this._view.close();
 		this._callback(obj);
 	}
 };
