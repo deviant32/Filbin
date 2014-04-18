@@ -16,4 +16,4 @@ stacktrace.log
 /.link_to_grails_plugins/
 /target-eclipse/
 .project
-/Filbin/target-eclipse
+/Filbin/target-eclipse/
