@@ -65,8 +65,8 @@ grails {
 
 aws {
 	domain="s3.amazonaws.com"
-	accessKey="AKIAILJIVZJGLEQUWCTQ"
-	secretKey="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"
+	accessKey="asdsad"
+	secretKey="asdasd"
 	bucketName="clientFiles"
 }
 
@@ -84,8 +84,8 @@ grails {
 	plugin {
 	   aws {
 		  credentials {
-			 accessKey = "AKIAILJIVZJGLEQUWCTQ"
-			 secretKey = "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"
+			 accessKey = "asdsad"
+			 secretKey = "asdas"
 		  }
 	   }
 	}
