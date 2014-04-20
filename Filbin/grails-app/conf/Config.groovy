@@ -63,6 +63,47 @@ grails {
     }
 }
 
+aws {
+	domain="s3.amazonaws.com"
+	accessKey="AKIAILJIVZJGLEQUWCTQ"
+	secretKey="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"
+	bucketName="clientFiles"
+}
+
+grails {
+	plugin {
+	   aws {
+		  s3 {
+			 bucket = "grails-plugin-test"
+		  }
+	   }
+	}
+ }
+
+grails {
+	plugin {
+	   aws {
+		  credentials {
+			 accessKey = "AKIAILJIVZJGLEQUWCTQ"
+			 secretKey = "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"
+		  }
+	   }
+	}
+ }
+
+grails {
+	plugin {
+	   aws {
+		  s3 {
+			 acl = "private"
+		  }
+	   }
+	}
+ }
+
+grails.plugin.awssdk.accessKey = "AKIAILJIVZJGLEQUWCTQ"
+grails.plugin.awssdk.secretKey = "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"
+
 grails.views.default.codec = "html"
  
 grails.converters.encoding = "UTF-8"
@@ -87,9 +128,11 @@ grails.hibernate.cache.queries = false
 environments {
     development {
         grails.logging.jul.usebridge = true
+		uploadFolder = "//Users/jkolba/desktop/FilbinDocs/"
     }
     production {
         grails.logging.jul.usebridge = false
+		uploadFolder = "c:/temp/upload/"
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }
@@ -126,6 +169,7 @@ grails.plugin.springsecurity.interceptUrlMap = [
 	'/**/favicon.ico':    ['permitAll'],
 	'/login/**':          ['permitAll'],
 	'/logout/**':         ['permitAll'],
+	'/DynamicForm/**':    ['permitAll'],
 	'/**':         ['ROLE_ADMIN'],
 	'/':         ['ROLE_ADMIN'],
  ]

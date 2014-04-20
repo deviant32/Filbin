@@ -54,6 +54,11 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.27'
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
+		// Workaround to resolve dependency issue with aws-java-sdk and http-builder (dependent on httpcore:4.0)
+		build 'org.apache.httpcomponents:httpcore:4.2'
+		build 'org.apache.httpcomponents:httpclient:4.2'
+		runtime 'org.apache.httpcomponents:httpcore:4.2'
+		runtime 'org.apache.httpcomponents:httpclient:4.2'
     }
 
     plugins {
@@ -66,6 +71,8 @@ grails.project.dependency.resolution = {
 		compile ":spring-security-core:2.0-RC2"
 		compile ":mysql-connectorj:5.1.22.1"
 		compile ":spring-security-ui:1.0-RC1"
+		runtime ':aws-sdk:1.7.4'
+		compile ":aws:1.7.5.0"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate:3.6.10.8" // or ":hibernate4:4.3.1.1"
@@ -73,6 +80,7 @@ grails.project.dependency.resolution = {
         runtime ":jquery:1.11.0"
 		compile ":kickstart-with-bootstrap:1.1.0"
         runtime ":resources:1.2.1"
+		
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0.1"
         //runtime ":cached-resources:1.1"

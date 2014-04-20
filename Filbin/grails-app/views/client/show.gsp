@@ -69,6 +69,37 @@
 		</tbody>
 	</table>
 	
+	<div style="margin-bottom: 30px;">
+		<div class="content scaffold-create" role="main">
+			<h2>Upload New Document</h2>
+			<g:if test="${flash.message}"><div class="message" role="status">${flash.message}</div></g:if>
+			
+			<g:uploadForm action="upload" class="form-horizontal">
+			   <input type="file" name="file"  style="display:inline"/>
+			   <input type="hidden" name="clientId" value="${clientInstance.id}" />
+			   <g:submitButton name="upload" value="Upload" />
+			</g:uploadForm>
+		</div>
+	</div>
+	<div class="well">
+	<g:if test="${flash.message}"><div class="message" role="status">${flash.message}</div></g:if>
+		<table style="margin-bottom:20px; width:100%;">
+			<thead>
+				<tr>
+					<g:sortableColumn property="filename" title="Filename" />
+					<g:sortableColumn property="uploadDate" title="Upload Date" />
+				</tr>
+			</thead>
+			<tbody>
+			<g:each in="${clientInstance.clientFiles}" status="i" var="documentInstance">
+				<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					<td><g:link action="download" id="${documentInstance.id}">${documentInstance.filename}</g:link></td>
+					<td><g:formatDate date="${documentInstance.uploadDate}" /></td>
+				</tr>
+			</g:each>
+			</tbody>
+		</table>
+	</div>
 	
 	<div>
     <h2>Proposals</h2>
