@@ -7,6 +7,38 @@
 	<meta name="layout" content="kickstart" />
 	<g:set var="entityName" value="${message(code: 'client.label', default: 'Client')}" />
 	<title><g:message code="default.show.label" args="[entityName]" /></title>
+
+	
+	<%--
+	
+	<script src='${resource(dir: 'js', file: 'binaryajax.js')}'></script>
+    <script src='${resource(dir: 'js', file: 'exif.js')}'></script>
+    <script src='${resource(dir: 'js', file: 'jquery.canvasResize.js')}'></script>
+    <script src='${resource(dir: 'js', file: 'canvasResize.js')}'></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('input[name=file]').change(function(e) {
+					var file = e.target.files[0];
+					canvasResize(file, {
+					width: 100,
+					height: 0,
+					crop: false,
+					quality: 20,
+					//rotate: 90,
+					callback: function(data, width, height) {
+						console.log($('input[name=file]'));
+						e.target.files[0] = data;
+					//$(img).attr('src', data);
+				}
+				});
+			});
+		});
+	</script>
+--%>
+
+
+
 </head>
 
 <body>
@@ -73,10 +105,10 @@
 		<div class="content scaffold-create" role="main">
 			<h2>Upload New Document</h2>
 			<g:if test="${flash.message}"><div class="message" role="status">${flash.message}</div></g:if>
-			
-			<g:uploadForm action="upload" class="form-horizontal">
-			   <input type="file" name="file"  style="display:inline"/>
-			   <input type="hidden" name="clientId" value="${clientInstance.id}" />
+			<g:uploadForm  action="upload">
+			   <input type="file" name="file"  style="display:inline" required/>
+			   <input type="text" id="fileName" name="fileName"  style="display:inline"/>
+			   <input type="hidden" name="clientId" value="${clientInstance.id }" />
 			   <g:submitButton name="upload" value="Upload" />
 			</g:uploadForm>
 		</div>

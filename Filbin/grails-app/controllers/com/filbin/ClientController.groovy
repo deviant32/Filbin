@@ -147,20 +147,23 @@ class ClientController {
 		if(file.empty) {
 			flash.message = "File cannot be empty"
 		} else {
+		
 			def documentInstance = new Document()
-			documentInstance.filename = file.originalFilename
-			//documentInstance.client = clientInstance;
+
+			if(params.getAt('fileName') != ''){
+				documentInstance.filename = params.getAt('fileName')+"."+file.getOriginalFilename().split('\\.').last();
+			}else{
+				documentInstance.filename = file.getOriginalFilename();
+			}
+			
 			documentInstance.client = Client.get(params.getAt("clientId"));
 			documentInstance.fullPath = documentInstance.client.getName()+"/"+documentInstance.filename
 			
-			def uploadedFile = file.inputStream.s3upload(documentInstance.client.getName()+"/"+file.originalFilename) {
+			def uploadedFile = file.inputStream.s3upload(documentInstance.client.getName()+"/"+documentInstance.filename) {
 				bucket "clientFiles"
 			}
-			//file.transferTo(new File(documentInstance.fullPath))
+			
 			documentInstance.save()
-			
-			
-			
 			 
 		}
 		
